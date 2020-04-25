@@ -15,7 +15,7 @@ public class FundooNotesApiApplication {
 private static final Logger log=LoggerFactory.getLogger(FundooNotesApiApplication.class);
 	public static void main(String[] args) {
 		SpringApplication.run(FundooNotesApiApplication.class, args);
-		log.info("now main application gets started");
+		log.info("main application gets started");
 	}
 
 }
