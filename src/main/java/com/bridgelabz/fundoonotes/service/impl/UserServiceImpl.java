@@ -26,13 +26,12 @@ import com.bridgelabz.fundoonotes.utility.MailService;
  */
 @Service
 public class UserServiceImpl implements UserService {
-	@Autowired
-	UserRepository userRepo;
+	private UserRepository userRepo;
 	@Autowired
 	private JavaMailSender javaMailSender;
 	@Autowired
 	private JWTUtil util;
-	@Autowired
+
 	private BCryptPasswordEncoder encoder;
 	@Autowired
 	private MailService mailService;
@@ -42,8 +41,10 @@ public class UserServiceImpl implements UserService {
 	 * private RedisTemplate<String, Object> redisTemplate; private
 	 * HashOperations<String, Long, User> hashOperations;
 	 */
-	public UserServiceImpl(UserRepository userRepo) {
+	public UserServiceImpl(UserRepository userRepo,BCryptPasswordEncoder encoder) {
+		super();
 		this.userRepo=userRepo;
+		this.encoder=encoder;
 	}
 	/*
 	 * @Autowired public UserServiceImpl(RedisTemplate<String, Object>
@@ -65,8 +66,8 @@ public class UserServiceImpl implements UserService {
 			return false;
 		}
 		user.setPassword(encoder.encode(user.getPassword()));
-		if (sendNotification(user))
-			userRepo.save(user);
+//		sendNotification(user);
+		userRepo.save(user);
 		return true;
 	}
 
@@ -247,5 +248,15 @@ public class UserServiceImpl implements UserService {
 		List<User> fetchedUsers=new ArrayList<User>();
 		userRepo.findAll().forEach(fetchedUsers::add);
 		return fetchedUsers;
+	}
+	public int findTheGreatestFromAllData() {
+		int[] data = userRepo.retrieveAllData();
+		int greatest = Integer.MIN_VALUE;
+		for (int value : data) {
+			if (value > greatest) {
+				greatest = value;
+			}
+		}
+		return greatest;
 	}
 }

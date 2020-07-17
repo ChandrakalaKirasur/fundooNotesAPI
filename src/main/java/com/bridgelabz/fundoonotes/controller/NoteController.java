@@ -129,7 +129,7 @@ public class NoteController {
 		if (!trashedNotes.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.OK).body(new Response("Trashed notes are", 200, trashedNotes));
 		}
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new Response("Trashed notes not found", 404, ""));
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Response("Trashed notes not found", 400, ""));
 	}
 
 	@GetMapping("/fetch/notes/labels/{noteID}")
@@ -139,7 +139,7 @@ public class NoteController {
 		if (!fetchedLabels.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.OK).body(new Response("Labels are", 200, fetchedLabels));
 		}
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new Response("Label not found for note", 404, ""));
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Response("Label not found for note", 400, ""));
 	}
 
 	@GetMapping("fetch/pinned/notes")

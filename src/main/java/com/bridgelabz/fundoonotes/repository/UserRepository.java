@@ -43,4 +43,8 @@ public interface UserRepository extends CrudRepository<User, Long> {
 		return user.get().getNotes().stream().filter(p -> p.getReminderDate() != null).collect(Collectors.toList());
 	}
 
+	public default int[] retrieveAllData() {
+		 return new int[] {1,2,4,8};
+	}
+
 }

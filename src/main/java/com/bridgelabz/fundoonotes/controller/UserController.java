@@ -45,9 +45,9 @@ public class UserController {
 	/*
 	 * welcome page
 	 */
-	@GetMapping("/")
+	@GetMapping("/welcome")
 	public String welcome() {
-		return "welcome ";
+		return "GOOD MORNING";
 	}
 
 	/* new user registration method and send link to mail verification */
